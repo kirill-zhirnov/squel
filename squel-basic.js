@@ -888,6 +888,11 @@ OTHER DEALINGS IN THE SOFTWARE.
         });
       };
 
+      GetFieldBlock.prototype.resetFields = function() {
+        this._fieldAliases = {};
+        return this._fields = [];
+      };
+
       GetFieldBlock.prototype.buildStr = function(queryBuilder) {
         var field, fields, _i, _len, _ref3;
         fields = "";

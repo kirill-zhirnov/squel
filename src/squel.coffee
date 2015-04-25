@@ -794,6 +794,10 @@ _buildSquel = ->
         name: field
         alias: alias
 
+    resetFields : ->
+      @_fieldAliases = {}
+      @_fields = []
+
     buildStr: (queryBuilder) ->
       fields = ""
       for field in @_fields
