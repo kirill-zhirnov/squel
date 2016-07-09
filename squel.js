@@ -1274,6 +1274,10 @@ OTHER DEALINGS IN THE SOFTWARE.
         return this.groups.push(field);
       };
 
+      GroupByBlock.prototype.resetGroups = function() {
+        return this.groups = [];
+      };
+
       GroupByBlock.prototype.buildStr = function(queryBuilder) {
         var f, groups, _i, _len, _ref5;
         groups = "";

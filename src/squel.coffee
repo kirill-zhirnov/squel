@@ -1059,6 +1059,9 @@ _buildSquel = ->
       field = @_sanitizeField(field)
       @groups.push field
 
+    resetGroups : ->
+      @groups = []
+
     buildStr: (queryBuilder) ->
       groups = ""
 
