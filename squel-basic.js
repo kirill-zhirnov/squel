@@ -1482,6 +1482,11 @@ OTHER DEALINGS IN THE SOFTWARE.
         });
       };
 
+      OrderByBlock.prototype.resetOrder = function() {
+        this.orders = [];
+        return this._values = [];
+      };
+
       OrderByBlock.prototype._buildStr = function(toParam) {
         var c, fstr, idx, o, orders, pIndex, _i, _j, _len, _ref5, _ref6;
         if (toParam == null) {
@@ -2064,7 +2069,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
     })(cls.QueryBuilder);
     _squel = {
-      VERSION: '3.10.0',
+      VERSION: '3.11.0',
       expr: function() {
         return new cls.Expression;
       },

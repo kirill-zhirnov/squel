@@ -1207,6 +1207,10 @@ _buildSquel = ->
         field: field
         dir: asc
 
+    resetOrder : ->
+      @orders = []
+      @_values = []
+      
     _buildStr: (toParam = false) ->
       if 0 < @orders.length
         pIndex = 0
