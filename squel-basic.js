@@ -811,6 +811,10 @@ OTHER DEALINGS IN THE SOFTWARE.
         return this._buildParam(queryBuilder, "FROM");
       };
 
+      FromTableBlock.prototype.resetFrom = function() {
+        return this.tables = [];
+      };
+
       return FromTableBlock;
 
     })(cls.AbstractTableBlock);
@@ -1574,7 +1578,8 @@ OTHER DEALINGS IN THE SOFTWARE.
         this.joins = [];
       }
 
-      JoinBlock.prototype.join = function(table, alias, condition, type) {
+      JoinBlock.prototype.join = function(table, alias, condition, type, prepend) {
+        var item;
         if (alias == null) {
           alias = null;
         }
@@ -1584,6 +1589,9 @@ OTHER DEALINGS IN THE SOFTWARE.
         if (type == null) {
           type = 'INNER';
         }
+        if (prepend == null) {
+          prepend = false;
+        }
         table = this._sanitizeTable(table, true);
         if (alias) {
           alias = this._sanitizeTableAlias(alias);
@@ -1591,12 +1599,17 @@ OTHER DEALINGS IN THE SOFTWARE.
         if (condition) {
           condition = this._sanitizeCondition(condition);
         }
-        this.joins.push({
+        item = {
           type: type,
           table: table,
           alias: alias,
           condition: condition
-        });
+        };
+        if (prepend) {
+          this.joins.unshift(item);
+        } else {
+          this.joins.push(item);
+        }
         return this;
       };
 

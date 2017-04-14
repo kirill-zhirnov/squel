@@ -730,6 +730,8 @@ _buildSquel = ->
       if 0 >= @tables.length then throw new Error "from() needs to be called"
       @_buildParam(queryBuilder, "FROM")
 
+    resetFrom : () ->
+      @tables = []
 
   # INTO table
   class cls.IntoTableBlock extends cls.Block
@@ -1287,16 +1289,22 @@ _buildSquel = ->
     #
     # 'type' must be either one of INNER, OUTER, LEFT or RIGHT. Default is 'INNER'.
     #
-    join: (table, alias = null, condition = null, type = 'INNER') ->
+    join: (table, alias = null, condition = null, type = 'INNER', prepend = false) ->
       table = @_sanitizeTable(table, true)
       alias = @_sanitizeTableAlias(alias) if alias
       condition = @_sanitizeCondition(condition) if condition
 
-      @joins.push
+      item =
         type: type
         table: table
         alias: alias
         condition: condition
+
+      if prepend
+        @joins.unshift item
+      else
+        @joins.push item
+
       @
 
 
